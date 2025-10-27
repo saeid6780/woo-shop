@@ -1,4 +1,4 @@
-# barebones
+# websima-shop
 
 A lightweight and skeletal WordPress boilerplate theme for HTML5 and beyond. There's lots of these out there but most themes include lots of bloat and files which you might not necessarily need, so we thought we would create our own which is great as a starting point with powerful features to encourage rapid development for most projects.
 
@@ -18,10 +18,10 @@ A lightweight and skeletal WordPress boilerplate theme for HTML5 and beyond. The
 
 ## Installation
 
-Clone the barebones repositories into your WordPress /wp-content/themes/ directory:
+Clone the websima-shop repositories into your WordPress /wp-content/themes/ directory:
 
-    git clone https://github.com/benchmarkstudios/barebones
-    cd barebones
+    git clone https://github.com/benchmarkstudios/websima-shop
+    cd websima-shop
 
 ### Using Laravel Mix
 

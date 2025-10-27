@@ -4,6 +4,7 @@
  * Custom functions / External files
  */
 
+define( 'WEBSIMA_VERSION', '1.0.0' );
 require_once 'includes/custom-functions.php';
 
 
@@ -13,19 +14,8 @@ require_once 'includes/custom-functions.php';
 
 if ( function_exists( 'add_theme_support' ) ) {
 
-    // Add support for document title tag
-    add_theme_support( 'title-tag' );
-
-    // Add Thumbnail Theme Support
-    add_theme_support( 'post-thumbnails' );
-    // add_image_size( 'custom-size', 700, 200, true );
-
-    // Add Support for post formats
-    // add_theme_support( 'post-formats', ['post'] );
-    // add_post_type_support( 'page', 'excerpt' );
-
     // Localisation Support
-    load_theme_textdomain( 'barebones', get_template_directory() . '/languages' );
+    load_theme_textdomain( 'websima-shop', get_template_directory() . '/languages' );
 }
 
 
@@ -57,26 +47,27 @@ remove_action('wp_print_styles', 'print_emoji_styles');
  * @return void
  */
 
-function barebones_post_comments_feed_link() {
+function websima_shop_post_comments_feed_link() {
     return;
 }
 
-add_filter('post_comments_feed_link', 'barebones_post_comments_feed_link');
+add_filter('post_comments_feed_link', 'websima_shop_post_comments_feed_link');
 
 
 /**
  * Enqueue scripts
  */
 
-function barebones_enqueue_scripts() {
+function websima_shop_enqueue_scripts() {
     // wp_enqueue_style( 'fonts', '//fonts.googleapis.com/css?family=Font+Family' );
     // wp_enqueue_style( 'icons', '//use.fontawesome.com/releases/v5.0.10/css/all.css' );
-    wp_deregister_script('jquery');
-    wp_enqueue_style( 'styles', get_stylesheet_directory_uri() . '/style.css?' . filemtime( get_stylesheet_directory() . '/style.css' ) );
-    wp_enqueue_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts.min.js?' . filemtime( get_stylesheet_directory() . '/js/scripts.min.js' ), [], null, true );
-}
+    wp_enqueue_style('websima-shop-style', get_stylesheet_uri(), array(), WEBSIMA_VERSION );
 
-add_action( 'wp_enqueue_scripts', 'barebones_enqueue_scripts' );
+    wp_enqueue_script('jquery');
+    wp_enqueue_style( 'websima-shop-custom-styles', get_stylesheet_directory_uri() . '/assets/styles/style.css?' . filemtime( get_stylesheet_directory() . '/style.css' ) );
+    wp_enqueue_script( 'websima-shop-custom-scripts', get_stylesheet_directory_uri() . '/assets/scripts/scripts.min.js?' . filemtime( get_stylesheet_directory() . '/js/scripts.min.js' ), ['jquery'], null, true );
+}
+add_action( 'wp_enqueue_scripts', 'websima_shop_enqueue_scripts' );
 
 
 /**
@@ -169,14 +160,35 @@ add_action( 'wp_print_styles', 'deregister_styles', 100 );
  * @return void
  */
 
-function barebones_register_nav_menus() {
+function websima_shop_setup() {
+
+    add_theme_support('title-tag');
+
+    add_theme_support('post-thumbnails');
+
+    add_theme_support('woocommerce');
+
     register_nav_menus([
         'header' => 'Header',
         'footer' => 'Footer',
     ]);
+
+    add_image_size('product-card-thumbnail', 400, 450, true); // 400px width, 450px height, hard crop
+
+}
+add_action( 'after_setup_theme', 'websima_shop_setup', 0 );
+
+if (function_exists('acf_add_options_page')) {
+
+    acf_add_options_page(array(
+        'page_title'    => 'تنظیمات عمومی قالب',
+        'menu_title'    => 'تنظیمات قالب',
+        'menu_slug'     => 'theme-general-settings',
+        'capability'    => 'edit_posts',
+        'redirect'      => false
+    ));
 }
 
-add_action( 'after_setup_theme', 'barebones_register_nav_menus', 0 );
 
 
 /**
@@ -186,7 +198,7 @@ add_action( 'after_setup_theme', 'barebones_register_nav_menus', 0 );
  * @return void
  */
 
-function barebones_nav_menu_args( $args ) {
+function websima_shop_nav_menu_args( $args ) {
     $args['container'] = false;
     $args['container_class'] = false;
     $args['menu_id'] = false;
@@ -195,7 +207,7 @@ function barebones_nav_menu_args( $args ) {
     return $args;
 }
 
-add_filter('wp_nav_menu_args', 'barebones_nav_menu_args');
+add_filter('wp_nav_menu_args', 'websima_shop_nav_menu_args');
 
 
 /**
@@ -206,13 +218,13 @@ add_filter('wp_nav_menu_args', 'barebones_nav_menu_args');
  * @return void
  */
 
-function barebones_button_shortcode( $atts, $content = null ) {
+function websima_shop_button_shortcode( $atts, $content = null ) {
     $atts['class'] = isset($atts['class']) ? $atts['class'] : 'btn';
     $atts['target'] = isset($atts['target']) ? $atts['target'] : '_self';
     return '<a class="' . $atts['class'] . '" href="' . $atts['link'] . '" target="'. $atts['target'] . '">' . $content . '</a>';
 }
 
-add_shortcode('button', 'barebones_button_shortcode');
+add_shortcode('button', 'websima_shop_button_shortcode');
 
 
 /**
@@ -222,14 +234,14 @@ add_shortcode('button', 'barebones_button_shortcode');
  * @return void
  */
 
-function barebones_mce_buttons_2( $buttons ) {
+function websima_shop_mce_buttons_2( $buttons ) {
     array_unshift( $buttons, 'styleselect' );
     $buttons[] = 'hr';
 
     return $buttons;
 }
 
-add_filter('mce_buttons_2', 'barebones_mce_buttons_2');
+add_filter('mce_buttons_2', 'websima_shop_mce_buttons_2');
 
 
 /**
@@ -239,7 +251,7 @@ add_filter('mce_buttons_2', 'barebones_mce_buttons_2');
  * @return void
  */
 
-function barebones_tiny_mce_before_init( $settings ) {
+function websima_shop_tiny_mce_before_init( $settings ) {
     $style_formats = [
         [
             'title' => 'Text Sizes',
@@ -284,7 +296,7 @@ function barebones_tiny_mce_before_init( $settings ) {
     return $settings;
 }
 
-add_filter('tiny_mce_before_init', 'barebones_tiny_mce_before_init');
+add_filter('tiny_mce_before_init', 'websima_shop_tiny_mce_before_init');
 
 
 /**
@@ -316,7 +328,7 @@ function front_page_on_pages_menu() {
     global $submenu;
     if ( get_option( 'page_on_front' ) ) {
         $submenu['edit.php?post_type=page'][501] = array( 
-            __( 'Front Page', 'barebones' ), 
+            __( 'Front Page', 'websima_shop' ),
             'manage_options', 
             get_edit_post_link( get_option( 'page_on_front' ) )
         ); 

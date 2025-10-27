@@ -3,7 +3,7 @@
 <main class="main" role="main">
     <div class="container">
 
-        <h1 class="text-2xl">Welcome to Barebones</h1>
+        <h1 class="text-2xl">Welcome to Websima Shop</h1>
 
         <div class="row">
             <div class="col col--lg-12 col--md-12 col--sm-12 col--xs-12">
