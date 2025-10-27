@@ -64,8 +64,15 @@ function websima_shop_enqueue_scripts() {
     wp_enqueue_style('websima-shop-style', get_stylesheet_uri(), array(), WEBSIMA_VERSION );
 
     wp_enqueue_script('jquery');
-    wp_enqueue_style( 'websima-shop-custom-styles', get_stylesheet_directory_uri() . '/assets/styles/style.css?' . filemtime( get_stylesheet_directory() . '/style.css' ) );
-    wp_enqueue_script( 'websima-shop-custom-scripts', get_stylesheet_directory_uri() . '/assets/scripts/scripts.min.js?' . filemtime( get_stylesheet_directory() . '/js/scripts.min.js' ), ['jquery'], null, true );
+    wp_enqueue_style( 'websima-shop-custom-styles', get_stylesheet_directory_uri() . '/assets/styles/style.css?' . filemtime( get_stylesheet_directory() . '/assets/styles/style.css' ) );
+    wp_enqueue_script( 'websima-shop-custom-scripts', get_stylesheet_directory_uri() . '/assets/scripts/scripts.js?' . filemtime( get_stylesheet_directory() . '/assets/scripts/scripts.js' ), ['jquery'], null, true );
+
+    // Enqueue SwiperJS CSS
+    wp_enqueue_style('swiper-css', get_stylesheet_directory_uri() . '/assets/styles/swiper-bundle.min.css', array(), '12.0.03');
+
+    // Enqueue SwiperJS JS
+    wp_enqueue_script('swiper-js', get_stylesheet_directory_uri() . '/assets/scripts/swiper-bundle.min.js', array(), '12.0.03', true);
+
 }
 add_action( 'wp_enqueue_scripts', 'websima_shop_enqueue_scripts' );
 
