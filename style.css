@@ -72,6 +72,23 @@ Text Domain: websima-shop
 /**
  * Grid scaffolding
  */
+@font-face {
+  font-family: IRANYekanXVF;
+  src: url("./assets/fonts/IRANYekanX/IRANYekanXVF.woff") format("woff-variations"), url("./assets/fonts/IRANYekanX/IRANYekanXVF.woff") format("woff");
+  font-weight: 100 1000;
+  font-display: fallback; }
+
+@font-face {
+  font-family: IRANYekanX;
+  src: url("./assets/fonts/IRANYekanX/IRANYekanX-Regular.woff") format("woff"); }
+
+@font-face {
+  font-family: IRANYekanX;
+  src: url("./assets/fonts/IRANYekanX/IRANYekanX-Bold.woff") format("woff");
+  font-weight: 700; }
+body {
+  font-family: IRANYekanXVF, IRANYekanX, tahoma;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;

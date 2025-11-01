@@ -1,0 +1,485 @@
+/*!
+Theme Name: Websima Shop
+Theme URI: https://benchmark.co.uk/websima-shop
+Author: Benchmark Studios
+Author URI: https://benchmark.co.uk/
+Description: A lightweight and skeletal WordPress boilerplate theme for HTML5 and beyond
+Version: 3.X
+License: MIT
+License URI: https://mit-license.org/
+Text Domain: websima-shop
+*/
+
+/*--------------------------------------------------------------
+# CSS Variables
+--------------------------------------------------------------*/
+:root {
+    --color-primary: #FF6B00;
+    --color-text: #333333;
+    --color-text-light: #777777;
+    --color-background: #FFFFFF;
+    --color-border: #E0E0E0;
+    --color-sale-badge: #FF4D4D;
+    --font-family: 'IRANYekanXVF', 'IRANYekanX', 'tahoma'; /* A good font for Persian UI */
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+    --border-radius-pill: 50px;
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/*--------------------------------------------------------------
+# General Styles
+--------------------------------------------------------------*/
+body {
+    font-family: var(--font-family);
+    direction: rtl;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/*--------------------------------------------------------------
+# Product Tabs Section
+--------------------------------------------------------------*/
+.websima-product-tabs {
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.websima-product-tabs__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.websima-product-tabs__header-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.btn--link {
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid var(--color-primary);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-pill);
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn--link.show-desktop{
+    display: inline-flex;
+}
+.btn--link.show-mobile{
+    display: none;
+}
+
+.btn--link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+/* --- Tabs Navigation --- */
+.websima-product-tabs__nav {
+    margin-bottom: 24px;
+}
+
+.tabs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto; /* For horizontal scrolling on small screens */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.tabs-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+.tab-button {
+    padding: 8px 20px;
+    border-radius: var(--border-radius-pill);
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-text-light);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.tab-button.is-active,
+.tab-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border-color: var(--color-primary);
+}
+
+/* --- Tab Panel --- */
+.tab-panel {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.tab-panel.is-active {
+    display: block;
+    opacity: 1;
+}
+
+/* --- Product Card --- */
+.product-card {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    text-align: right;
+    transition: box-shadow 0.3s, transform 0.3s;
+    height: 100%; /* Important for grid layout */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-5px);
+}
+
+.product-card__image-link {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.product-card__image-link img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 400 / 450; /* Matches add_image_size */
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+}
+
+.product-card__details {
+    margin-bottom: 16px;
+    flex-grow: 1; /* Pushes footer down */
+}
+
+.product-card__title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+.product-card__title:before{
+    content: "";
+    display: inline-block;
+    margin-left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+.product-card__title a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.product-card__meta {
+    display: inline-block;
+    color: #FFF;
+    background-color: var(--color-primary);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: var(--border-radius-sm);
+}
+
+.product-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-card__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sale-badge {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: var(--border-radius-sm);
+}
+
+.price {
+    font-weight: 700;
+}
+.price del { color: var(--color-text-light); font-weight: 400; }
+.price ins { text-decoration: none; color: var(--color-text); display: block }
+.price .currency { font-size: 12px; font-weight: 400; }
+
+.product-card__add-to-cart {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius-sm);
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+.product-card__add-to-cart svg path{
+    transition: all 0.3s;
+}
+.product-card__add-to-cart:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background) !important;
+    border-color: var(--color-primary);
+}
+.product-card__add-to-cart:hover svg path{
+    fill: #fff;
+}
+
+
+/* --- Swiper Pagination --- */
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    height: auto; /* Allow slides to determine their height */
+    display: flex;
+    flex-direction: column;
+}
+.swiper-pagination {
+    position: static !important;
+    margin-top: 10px !important;
+}
+.swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    background-color: var(--color-border) !important;
+    opacity: 1 !important;
+}
+.swiper-pagination-bullet-active {
+    background-color: var(--color-primary) !important;
+}
+/* --- Level 1 Tabs (Bottom) --- */
+.tabs-slider {
+    margin-top: 32px;
+}
+/* --- Level 1 Tabs (Bottom) --- */
+.websima-product-tabs__nav--level-1 {
+    margin-top: 32px;
+}
+
+.websima-product-tabs__nav--level-1 .tab-button {
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: var(--border-radius-md);
+    text-align: right;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background);
+    border: 1px solid transparent;
+    position: relative;
+}
+.websima-product-tabs__nav--level-1 .tab-button span{
+    display: block;
+}
+.websima-product-tabs__nav--level-1 .tab-button.is-active {
+    border-color: var(--color-primary);
+}
+.websima-product-tabs__nav--level-1 .tab-button__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+}
+.websima-product-tabs__nav--level-1 .tab-button__subtitle {
+    font-size: 10px;
+    color: var(--color-text-light);
+    margin-top: 4px;
+}
+.websima-product-tabs__nav--level-1 .tab-button__icon {
+    margin-right: auto;
+    color: var(--color-text-light);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    position: absolute;
+    left: -18px;
+    top: 20px;
+    bottom: 0;
+    display: flex !important;
+    justify-content: center;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+.websima-product-tabs__nav--level-1 .tab-button.is-active .tab-button__icon {
+    background-color: #fff;
+
+
+}
+
+/*--------------------------------------------------------------
+# AJAX Loading State
+  --------------------------------------------------------------*/
+.loading-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px; /* Give it some space */
+    width: 100%;
+}
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid var(--color-border);
+    border-bottom-color: var(--color-primary);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*--------------------------------------------------------------
+# Desktop Styles (min-width: 992px)
+--------------------------------------------------------------*/
+@media (min-width: 992px) {
+    .section-title {
+        font-size: 24px;
+        margin-right: 16px;
+    }
+
+    /* Convert Swiper to Grid */
+    .product-slider .swiper-wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+
+    .product-slider .swiper-slide {
+        width: 100% !important; /* Override swiper inline styles */
+    }
+
+    .product-slider-pagination {
+        display: none; /* Hide pagination on desktop */
+    }
+
+    /* --- 2. Convert Bottom Tabs Slider to Grid --- */
+    .tabs-slider .swiper-wrapper {
+        /* 1. Use Flexbox for a single row layout */
+        display: flex;
+        flex-wrap: nowrap; /* Ensure items stay in one line */
+
+        /* 2. Enable horizontal scrolling when content overflows */
+        overflow-x: auto;
+
+        /* 3. A small padding at the bottom to make space for the scrollbar */
+        padding-bottom: 15px;
+
+        /* This resets the grid-gap if it was inherited */
+        gap: 24px;
+    }
+
+    .tabs-slider .swiper-slide {
+        /* 4. Define the width of each item. */
+        /* 'flex: 0 0 calc(...)' prevents items from shrinking or growing. */
+        /* Formula: (100% of container width - total gap space) / number of items */
+        /* Total gap for 5 items is 4 * 24px = 96px */
+        flex: 0 0 calc((100% - 96px) / 5);
+
+        /* This overrides any inline width set by Swiper before it was destroyed */
+        width: calc((100% - 96px) / 5) !important;
+    }
+
+    .tabs-slider-pagination {
+        display: none; /* Hide pagination on desktop */
+    }
+
+
+    /* Style Level 1 Tabs for Desktop */
+    .websima-product-tabs__nav--level-1 .tabs-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Assuming 3 tabs at the bottom */
+        gap: 24px;
+    }
+
+    .tabs-slider .swiper-wrapper::-webkit-scrollbar {
+        height: 6px; /* Height of the scrollbar */
+    }
+    .tabs-slider .swiper-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1; /* The track (the bar) */
+        border-radius: 10px;
+    }
+    .tabs-slider .swiper-wrapper::-webkit-scrollbar-thumb {
+        background: var(--color-border); /* The draggable scrolling handle */
+        border-radius: 10px;
+    }
+    .tabs-slider .swiper-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #b3b3b3;
+    }
+}
+@media (max-width: 576px) {
+    .product-card{
+        width: 280px;
+        margin: 0 auto;
+    }
+    .websima-product-tabs__nav--level-1 .swiper-slide{
+        text-align: center;
+    }
+    .websima-product-tabs__nav--level-1 .tab-button{
+        width: 300px;
+    }
+    .websima-product-tabs__header{
+        display: block;
+    }
+    .websima-product-tabs__header-main{
+        display: block;
+        text-align: center;
+    }
+    .section-title{
+        margin-top: 16px;
+    }
+    .btn--link.show-desktop{
+        display: none;
+    }
+    .btn--link.show-mobile{
+        display: inline;
+        margin-top: 26px;
+    }
+    .mobile-btn-container{
+        display: flex;
+        justify-content: center;
+    }
+}
